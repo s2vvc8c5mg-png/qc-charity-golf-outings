@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charity Golf Outings — Quad Cities</title>
+<style>
+  :root {
+    --bg: #fcfcfc;
+    --text: #111112;
+    --text-muted: #6b7280;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    padding: 3rem 1.25rem 4rem;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  header { margin-bottom: 2.5rem; }
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+  .meta {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .intro {
+    margin: 1.5rem 0 2rem;
+    color: #374151;
+    font-size: 1.02rem;
+  }
+  .controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+  input, select {
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+  }
+  input { flex: 1; min-width: 220px; }
+  input:focus, select:focus { outline: 2px solid #bfdbfe; border-color: var(--accent); }
+  .list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.15rem 1.25rem;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: #d1d5db; }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .event { font-weight: 600; font-size: 1.02rem; }
+  .date { color: var(--text-muted); font-size: 0.875rem; white-space: nowrap; }
+  .org { color: #4b5563; font-size: 0.9rem; margin-bottom: 0.6rem; }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    color: #374151;
+  }
+  .contact-row span { display: flex; align-items: center; gap: 0.35rem; }
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #4b5563;
+    font-weight: 500;
+  }
+  .badge-direct { background: #ecfdf5; color: #065f46; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 2.5rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  @media (max-width: 640px) {
+    body { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    .card-header { flex-direction: column; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Charity Golf Outings</h1>
+    <div class="meta">Quad Cities area · ~50-mile radius of 61244 · Oct 2024 – Oct 2026</div>
+  </header>
+
+  <p class="intro">Public contact information for charity, fundraiser, and corporate golf outings. Compiled from event pages, registration sites, and local sources. Only verified public contacts are shown.</p>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search events, organizers, contacts…">
+    <select id="filterYear">
+      <option value="">All years</option>
+      <option value="2026">2026</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+    </select>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <footer>
+    Public-facing contacts only · Compiled 15 October 2026 · Always verify the source for current details
+  </footer>
+</div>
+
+<script>
+const events = [
+  {"event":"Riverside Foundation 2026 Golf Outing","date":"Oct 5, 2026","organizer":"Riverside Foundation","contact":"Mark Ingrum","email":"mark@riversidefoundation.net","phone":"847-634-3973 ext. 213","type":"direct","url":"https://www.riversidefoundation.net/events/2025-golf-outing/"},
+  {"event":"Wendland-Moran Memorial Golf Outing 2026","date":"Oct 4, 2026","organizer":"Rock Island-Milan Booster Club","contact":"—","email":"RockIslandMilanBoosterClub@yahoo.com","phone":"—","type":"organization-general","url":"https://allevents.in/rock-island/wendland-moran-memorial-golf-outing/200028527565138"},
+  {"event":"Milan IL Chamber Annual Golf Classic","date":"Sept 28, 2026","organizer":"Milan IL Chamber of Commerce","contact":"—","email":"MilanILChamber@gmail.com","phone":"309-716-8144","type":"organization-general","url":"https://milanilchamber.org"},
+  {"event":"ILICA Area 3 Trap Shoot & Golf Outing","date":"Sept 18, 2026","organizer":"ILICA Area 3","contact":"—","email":"—","phone":"(309) 932-1230","type":"organization-general","url":"https://aroundptown.com/ilica-trap-shoot-golf-outing-scheduled-for-september-18-in-kewanee/"},
+  {"event":"Augustana Viking Club Golf Outing (15th)","date":"Sept 18, 2026","organizer":"Augustana College","contact":"Michael Zapolski","email":"mikezapolski@augustana.edu","phone":"309-794-7000","type":"direct","url":"https://athletics.augustana.edu/news/2026/6/10/general-viking-club-golf-outing-set-for-september-18-at-highland-springs-golf-course.aspx"},
+  {"event":"RMHC-EIWI 3rd Annual Golf Gala","date":"Sept 15, 2026","organizer":"RMHC-EIWI","contact":"—","email":"development@rmhc-eiwi.org","phone":"(319) 500-7642","type":"direct","url":"https://rmhc-eiwi.org/events/"},
+  {"event":"CASI Chip in Fore Seniors (5th)","date":"Sept 4, 2026","organizer":"CASI","contact":"—","email":"info@casiseniors.org","phone":"563-386-7477","type":"organization-general","url":"https://casiseniors.org/special-events"},
+  {"event":"St. Ambrose Fighting Bee Golf Classic (28th)","date":"Aug 21, 2026","organizer":"St. Ambrose University Athletics","contact":"Caitlin O'Brien","email":"Obriencaitlin@sau.edu","phone":"—","type":"direct","url":"https://epay.sau.edu/C21430_ustores/web/product_detail.jsp?PRODUCTID=1956"},
+  {"event":"UT Panther Wrestling 30th Annual","date":"Aug 15, 2026","organizer":"UTHS Wrestling","contact":"Lambros Fotos","email":"lfotos@uths.net","phone":"(309) 230-7076","type":"direct","url":"https://sites.google.com/uths.net/uths-wrestling/golf-outing"},
+  {"event":"John Deere Classic — Birdies for Charity 2026","date":"Jul 2–5, 2026","organizer":"John Deere Classic","contact":"Micaela Booth","email":"micaelab@jdclassic.com","phone":"(309) 762-4653","type":"direct","url":"https://johndeereclassic.com/john-deere-classic-generates-record-20-1-million-for-492-charities"},
+  {"event":"Youth Service Bureau Community Golf Outing","date":"June 15, 2026","organizer":"Youth Service Bureau of Rock Island County","contact":"Cara Marske","email":"cara.marske@ysbri.com","phone":"(309) 524-3212","type":"direct","url":"https://www.ysbri.com/docs/2026RegistrationForm.pdf"},
+  {"event":"Putt for Purple (2nd Annual)","date":"June 6, 2026","organizer":"Ohl Strong Foundation","contact":"—","email":"info@reserveartisanales.com","phone":"309-541-1010","type":"direct","url":"https://www.reserveartisanales.com/events/2nd-annual-putt-for-purple"},
+  {"event":"Quad Cities Chamber 2026 Golf Outing","date":"June 4, 2026","organizer":"Quad Cities Chamber","contact":"—","email":"info@quadcitieschamber.com","phone":"563.322.1706","type":"direct","url":"https://member.quadcitieschamber.com/events/details/2026-golf-outing-presented-by-rouse-consulting-group-24231"},
+  {"event":"Empowering Abilities Annual Golf Outing","date":"June 1, 2026","organizer":"Empowering Abilities","contact":"Carol Foster","email":"CarolFoster@empoweringabilities.org","phone":"563-391-4834","type":"organization-general","url":"https://mcusercontent.com/fb84ccd8c93b4ca247002d63f/files/98b122b1-4b12-f967-17c0-db495f770839/May_Boosters_2026.pdf"},
+  {"event":"OSF Saint Luke Annual Charity Golf Classic","date":"June 1, 2026","organizer":"OSF HealthCare Saint Luke","contact":"—","email":"—","phone":"(877) 574-5678","type":"organization-general","url":"https://apps.osfhealthcare.org/news/?location=3"},
+  {"event":"Habitat for Humanity QC Golf FORE Homes (16th)","date":"May 8, 2026","organizer":"Habitat for Humanity Quad Cities","contact":"Cassandra","email":"cassandra@habitatqc.org","phone":"563-359-9066","type":"direct","url":"https://give.habitatqc.org/campaigns/43592-golf-fore-homes-2026"},
+  {"event":"Jim Victor Memorial JA Golf Classic 2026","date":"May 4, 2026","organizer":"Junior Achievement of the Heartland","contact":"Makenzie Morris","email":"makenzie.morris@ja.org","phone":"(309) 736-1630","type":"organization-general","url":"https://heartland.ja.org/events/2026-jim-victor-memorial-ja-golf-classic"},
+  {"event":"Gilda's Club Golf Fore! Gilda's 2026","date":"May 1, 2026","organizer":"Gilda's Club Quad Cities","contact":"—","email":"gc@csciowaillinois.org","phone":"(563) 326-7504","type":"direct","url":"https://gildasclubqc.org/golf-fore-gildas/"},
+  {"event":"Bettendorf Schools Nurses Iron Tee","date":"Dec 10, 2025","organizer":"Bettendorf Schools nurses","contact":"—","email":"contactus@bettschools.org","phone":"(563) 359-3681 ext. 3005","type":"organization-general","url":"https://www.ea.bettendorf.k12.ia.us/o/ea/live-feed"},
+  {"event":"DAFF Downing Fundraiser","date":"Oct 25, 2025","organizer":"Davenport Association of Professional Fire Fighters","contact":"—","email":"info@iafflocal17.org","phone":"(563) 386-6421","type":"organization-general","url":"https://krna.com/ixp/712/p/downing-golf-fundraiser/"},
+  {"event":"Wendland-Moran Memorial Golf Outing 2025","date":"Oct 5, 2025","organizer":"Rock Island-Milan Booster Club","contact":"—","email":"RockIslandMilanBoosterClub@yahoo.com","phone":"—","type":"organization-general","url":"https://allevents.in/rock-island/wendland-moran-memorial-golf-outing/200028527565138"},
+  {"event":"Augustana Viking Club Golf Outing (14th)","date":"Sept 20, 2025","organizer":"Augustana College","contact":"Michael Zapolski","email":"mikezapolski@augustana.edu","phone":"309-794-7000","type":"direct","url":"https://athletics.augustana.edu/news/2025/6/16/general-viking-club-golf-outing-set-for-september-20-at-highland-springs-golf-course.aspx"},
+  {"event":"RMHC-EIWI 2nd Annual Golf Gala","date":"Sept 16, 2025","organizer":"RMHC-EIWI","contact":"—","email":"development@rmhc-eiwi.org","phone":"(319) 500-7642","type":"direct","url":"https://97x.com/ixp/965/p/golf-gala-iron-tee-golf-bettendorf-iowa/"},
+  {"event":"CPO Amputee Golf Outing 2025","date":"Sept 12, 2025","organizer":"Comprehensive Prosthetics & Orthotics","contact":"Kara Conner","email":"kconner@cpousa.com","phone":"(309) 408-0222","type":"direct","url":"https://www.cpousa.com/events/2025-quad-cities-cpo-amputee-golf-outing/"},
+  {"event":"CASI Chip in Fore Seniors (4th)","date":"Sept 5, 2025","organizer":"CASI","contact":"Sue Fleischman Rector","email":"SRector@CASIseniors.org","phone":"563-386-7477","type":"direct","url":"https://www.rcreader.com/news-releases/casi-announces-2025-golf-outing-chip-fore-seniors"},
+  {"event":"St. Ambrose Fighting Bee Golf Classic","date":"Aug 22, 2025","organizer":"St. Ambrose University Athletics","contact":"Caitlin O'Brien","email":"Obriencaitlin@sau.edu","phone":"—","type":"direct","url":"https://epay.sau.edu/C21430_ustores/web/product_detail.jsp?PRODUCTID=1956"},
+  {"event":"Bettendorf Wrestling Club 25th Annual","date":"Aug 9, 2025","organizer":"Bettendorf Wrestling Club","contact":"Andrew DeCap","email":"—","phone":"319-855-0809","type":"direct","url":"https://nebula.wsimg.com/b1ccb77140184a453b605a321e046452"},
+  {"event":"AWMI Quad Cities Chapter Golf Outing","date":"July 8, 2025","organizer":"AWMI Quad Cities Chapter","contact":"Jaclyn Schuette","email":"jaclyn.schuette@ssab.com","phone":"—","type":"organization-general","url":"https://quadcitieschapter.awmi.org/event/awmi-quad-cities-golf-outing/"},
+  {"event":"John Deere Classic — Birdies for Charity 2025","date":"Jul 2–6, 2025","organizer":"John Deere Classic","contact":"Micaela Booth","email":"micaelab@jdclassic.com","phone":"(309) 762-4653","type":"direct","url":"https://woc1420.iheart.com/content/2025-10-10-john-deere-classic-birdies-for-charity-sets-another-fundraising-record/"},
+  {"event":"QC United Swing into Education (25th)","date":"June 20, 2025","organizer":"QC United","contact":"Kim Riley-Quinn","email":"kim.riley@qcunited.org","phone":"(563) 349-1870","type":"direct","url":"https://files.constantcontact.com/823aa5dc001/8669affd-6b71-46d8-8f0d-fa4b4474f781.pdf"},
+  {"event":"Quad Cities Chamber 2025 Golf Outing","date":"June 4, 2025","organizer":"Quad Cities Chamber","contact":"Anna Possehl","email":"apossehl@quadcitieschamber.com","phone":"563.823.2659","type":"direct","url":"https://member.quadcitieschamber.com/events/details/quad-cities-chamber-2025-golf-outing-23463"},
+  {"event":"Empowering Abilities HANDS Auxiliary","date":"June 2, 2025","organizer":"Empowering Abilities","contact":"Carol Foster","email":"CarolFoster@empoweringabilities.org","phone":"563-391-4834","type":"organization-general","url":"https://quadcitiesbusiness.com/register-now-for-empowering-abilities-golf-outing-june-2/"},
+  {"event":"Putt for Purple (1st Annual)","date":"June 2025","organizer":"Ohl Strong Foundation","contact":"Peggy Ohl","email":"—","phone":"309-721-1356","type":"organization-general","url":"https://www.reserveartisanales.com/s/Sponsor-Putt-for-purple.pdf"},
+  {"event":"Rasmusson Charity Golf Outing (7th)","date":"2025","organizer":"Kat Schill","contact":"Kat Schill","email":"—","phone":"—","type":"not found","url":"https://www.gofundme.com/f/2025-rasmusson-charity-golf-outing"},
+  {"event":"Tim Eagle Memorial Golf Outing","date":"2025","organizer":"Eagle family","contact":"—","email":"—","phone":"—","type":"not found","url":"https://www.legacy.com/us/obituaries/qctimes/name/richard-eagle-obituary?id=61416413"},
+  {"event":"Lead(h)er Annual Golf Outing (5th)","date":"May 16, 2025","organizer":"Lead(h)er","contact":"Hannah Howard","email":"hannah@leadherqc.org","phone":"—","type":"organization-general","url":"https://golfstatus.com/golfforgood/leadhers-golf-fundraiser-breaks-barriers-empowers-women"},
+  {"event":"Transitions Mental Health Services 15th Annual","date":"May 16, 2025","organizer":"Transitions Mental Health Services","contact":"Courtney Stenzel","email":"cstenzel@transmhs.org","phone":"309-236-0010","type":"direct","url":"https://happeningnext.com/event/transitions-mental-health-services-15th-annual-golf-outing-fundraiser-eid3a0caw7pxj"},
+  {"event":"Little Bogey's Golf Classic (29th)","date":"May 12, 2025","organizer":"SAL Community Services","contact":"Luis Moreno","email":"lmoreno@salcommunityservices.org","phone":"(309) 207-8778","type":"direct","url":"https://www.volunteersignup.org/WFQJK?classic"},
+  {"event":"Habitat for Humanity QC Golf FORE Homes (15th)","date":"May 9, 2025","organizer":"Habitat for Humanity Quad Cities","contact":"Cassandra","email":"cassandra@habitatqc.org","phone":"563-359-9066","type":"direct","url":"https://give.habitatqc.org/ge/golf2024"},
+  {"event":"Jim Victor Memorial JA Golf Classic 2025","date":"May 5, 2025","organizer":"Junior Achievement of the Heartland","contact":"Makenzie Morris","email":"makenzie.morris@ja.org","phone":"(309) 736-1630","type":"organization-general","url":"https://heartland.ja.org/events/2025-jim-victor-memorial-ja-golf-classic"},
+  {"event":"Gilda's Club Golf Fore! Gilda's 2025","date":"May 2, 2025","organizer":"Gilda's Club Quad Cities","contact":"—","email":"gc@csciowaillinois.org","phone":"(563) 326-7504","type":"direct","url":"https://ticketsignup.io/TicketEvent/Golf4Gildas25"},
+  {"event":"RMHC-EIWI 1st Annual Golf Gala","date":"Sept 17, 2024","organizer":"RMHC-EIWI","contact":"—","email":"development@rmhc-eiwi.org","phone":"(319) 500-7642","type":"direct","url":"https://quadcitiesbusiness.com/ronald-mcdonald-house-to-host-fundraiser-at-iron-tee/"},
+  {"event":"Augustana Viking Club Golf Outing (13th)","date":"Sept 7, 2024","organizer":"Augustana College","contact":"Michael Zapolski","email":"mikezapolski@augustana.edu","phone":"309-794-7000","type":"direct","url":"http://athletics.augustana.edu/news/2024/6/20/general-viking-club-golf-outing-set-for-september-7-at-tpc-deere-run.aspx"},
+  {"event":"CASI Chip in Fore Seniors (3rd)","date":"Sept 6, 2024","organizer":"CASI","contact":"Sue Rector","email":"srector@casiseniors.org","phone":"563-386-7477","type":"direct","url":"https://www.getmeregistered.com/eventdetails/137091"},
+  {"event":"Muskie Softball Boosters Golf Fundraiser (5th)","date":"Aug 24, 2024","organizer":"Muscatine HS softball boosters","contact":"Tiffany Meiburg / Kelly Gray","email":"MHSSOFTBALL@MAIL.COM","phone":"(563) 506-7730","type":"direct","url":"https://www.muscatine.k12.ia.us/muskie-softball-boosters-golf-fundraiser-2024/"},
+  {"event":"Pleasant Valley Wrestling Grapple on the Greens","date":"Aug 24, 2024","organizer":"Pleasant Valley wrestling","contact":"—","email":"zahntrever@pleasval.k12.ia","phone":"—","type":"direct","url":"https://www.rcreader.com/taxonomy/term/43171/all"},
+  {"event":"Black Hawk College Braves Golf Fundraiser","date":"Aug 5, 2024","organizer":"Black Hawk College Athletics","contact":"Tara Carey","email":"careyt@bhc.edu","phone":"309-796-5601","type":"organization-general","url":"https://www.bhc.edu/events/category/quad-cities/athletics/golf/list/"},
+  {"event":"Pleasant Valley Wrestling Inaugural Golf Outing","date":"July 27, 2024","organizer":"Pleasant Valley wrestling","contact":"—","email":"PVWCTreasurer4@gmail.com","phone":"—","type":"direct","url":"https://happeningnext.com/event/pleasant-valley-wrestling’s-inaugural-golf-outing-eid3a0bj2lace"},
+  {"event":"John Deere Classic — Birdies for Charity 2024","date":"Jul 4–7, 2024","organizer":"John Deere Classic","contact":"Micaela Booth","email":"micaelab@jdclassic.com","phone":"(309) 762-4653","type":"direct","url":"https://johndeereclassic.com/2024-john-deere-classic-generates-a-record-15-9-million-for-charity"},
+  {"event":"Ridgecrest Foundation Golf Outing (5th)","date":"June 28, 2024","organizer":"Ridgecrest Foundation","contact":"Carrie Dreifurst","email":"cdreifurst@ridgecrestvillage.org","phone":"(563) 388-3431","type":"direct","url":"https://www.northscottpress.com/stories/ridgecrest-foundation-to-host-golf-outing-in-september,76052"},
+  {"event":"QC Fragile X Golf Outing (5th)","date":"June 22, 2024","organizer":"National Fragile X Foundation","contact":"—","email":"contact@fragilex.org","phone":"(202) 747-6210","type":"organization-general","url":"https://fragilex.org/community/marners-host-5th-annual-fx-golf-outing/"},
+  {"event":"QC United Swing into Education (24th)","date":"~June 21, 2024","organizer":"QC United","contact":"Kim Riley-Quinn","email":"kim.riley@qcunited.org","phone":"(563) 349-1870","type":"direct","url":"https://files.constantcontact.com/823aa5dc001/8669affd-6b71-46d8-8f0d-fa4b4474f781.pdf"},
+  {"event":"Jim Lodico Memorial WIU Alumni Golf Outing","date":"June 17, 2024","organizer":"WIU Alumni Association","contact":"—","email":"A-Association@wiu.edu","phone":"(309) 298-1914","type":"organization-general","url":"https://stayhappening.com/e/jim-lodico-62-75-memorial-quad-cities-alumni-andamp-friends-golf-outing-E2ISWLA1M1G"},
+  {"event":"Bettendorf Boosters Golf Outing","date":"June 15, 2024","organizer":"Bettendorf athletic boosters","contact":"Traci Huskey","email":"—","phone":"(563) 508-1900","type":"direct","url":"https://happeningnext.com/event/bettendorf-athletic-boosters-annual-golf-outing-eid3a0bb978tx"},
+  {"event":"Habitat for Humanity QC Golf FORE Homes (14th)","date":"June 14, 2024","organizer":"Habitat for Humanity Quad Cities","contact":"Rebecca","email":"rebecca@habitatqc.org","phone":"563-359-9066","type":"direct","url":"https://www.rcreader.com/news-releases/register-today-golf-fore-homes"},
+  {"event":"Quad Cities Chamber 2024 Golf Outing","date":"June 5, 2024","organizer":"Quad Cities Chamber","contact":"Anna Possehl","email":"apossehl@quadcitieschamber.com","phone":"563.823.2659","type":"direct","url":"https://member.quadcitieschamber.com/events/details/quad-cities-chamber-2024-golf-outing-22572"},
+  {"event":"Rasmusson Charity Golf Outing (6th)","date":"2024","organizer":"Kat Schill","contact":"Kat Schill","email":"—","phone":"—","type":"not found","url":"https://www.gofundme.com/f/rasmusson-charity-golf-outing"},
+  {"event":"Little Bogey's Golf Classic (28th)","date":"May 13, 2024","organizer":"SAL Community Services","contact":"Amber Wood","email":"awood@salcommunityservices.org","phone":"(309) 429-5512","type":"direct","url":"https://volunteersignup.org/KQAMH?classic"},
+  {"event":"Jim Victor Memorial JA Golf Classic 2024","date":"May 6, 2024","organizer":"Junior Achievement of the Heartland","contact":"Makenzie Morris","email":"makenzie.morris@ja.org","phone":"(309) 736-1630","type":"organization-general","url":"https://heartland.ja.org/events/2024-jim-victor-memorial-ja-golf-classic"},
+  {"event":"Gilda's Club Golf Fore Gilda's 2024","date":"May 3, 2024","organizer":"Gilda's Club Quad Cities","contact":"Lexi Bull","email":"gc@csciowaillinois.org","phone":"(563) 326-7504","type":"direct","url":"https://www.rcreader.com/node/65290"},
+  {"event":"Fore Wishes Quad Cities (Make-A-Wish Illinois)","date":"Oct 23, 2026","organizer":"Make-A-Wish Illinois","contact":"—","email":"forewishesqc@gmail.com","phone":"309-428-1018","type":"direct","url":"https://wish.org/illinois/fore-wishes-tournament"},
+  {"event":"The Arc of the Quad Cities Area Charity Golf Outing","date":"July 27, 2026","organizer":"The Arc of the Quad Cities Area","contact":"—","email":"gadients@arcqca.org","phone":"309-786-6474","type":"direct","url":"https://arcqca.org/events/charity-golf-outing/"},
+  {"event":"Kewanee Firefighters Local 513 Charity Golf Outing","date":"July 25, 2026","organizer":"Kewanee Firefighters Local 513","contact":"Andrew Welgat","email":"iafflocal513@gmail.com","phone":"309-852-2115","type":"direct","url":"https://www.regionalmedianews.com/news/local/kewanee-fire-department-annual-charity-golf-outing-set-for-july-25-2026/"},
+  {"event":"Russell’s Annual Charity Golf Outing (38th)","date":"Typically September","organizer":"Russell Group","contact":"—","email":"hello@russellco.com","phone":"(563) 459-4600","type":"organization-general","url":"https://www.russellco.com/russells-38th-annual-charity-golf-outing/"},
+  {"event":"Chip in Fore Children (LSSI)","date":"Sept 13, 2025","organizer":"Lutheran Social Services of Illinois","contact":"Andrea McClean","email":"—","phone":"309-373-3728","type":"direct","url":"https://www.kwqc.com/2025/06/27/tee-off-cause-chip-fore-children-golf-outing/"},
+  {"event":"QCAWC Par Fore Pets Golf Outing","date":"May 16, 2026","organizer":"Quad City Animal Welfare Center","contact":"Patti McRae","email":"patti@qcawc.org","phone":"309-787-6830 ext. 13","type":"direct","url":"https://qcawc.org/how-to-help/upcoming-events/view/499"},
+  {"event":"Byron Hills Fore Heroes Golf Outing","date":"July 12, 2025","organizer":"Byron Hills Fore Heroes Inc","contact":"Shane Kern / Jackie Groves","email":"byronhillsforeheroes@gmail.com","phone":"—","type":"direct","url":"https://www.bhfhgolf.com/"},
+  {"event":"Kewanee Police FOP Charity Golf Outing","date":"July 11, 2026","organizer":"Kewanee Police Department FOP","contact":"Eric Peed","email":"epeed@cityofkewanee.net","phone":"309-853-1911","type":"direct","url":"https://kewaneevoice.com/kewanee-police-department-hosts-10th-annual-charity-golf-outing/"},
+  {"event":"Coyne Center Fire Protection District Golf Outing","date":"Aug 15, 2026","organizer":"Coyne Center Fire Protection District","contact":"—","email":"—","phone":"563-340-3951","type":"organization-general","url":"https://www.facebook.com/QCGOLFTOURNAMENTS"}
+];
+
+function badgeClass(t) {
+  return t === 'direct' ? 'badge badge-direct' : 'badge';
+}
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const year = document.getElementById('filterYear').value;
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+
+  events.forEach(ev => {
+    const hay = (ev.event + ' ' + ev.organizer + ' ' + ev.contact + ' ' + ev.email).toLowerCase();
+    if (q && !hay.includes(q)) return;
+    if (year && !ev.date.includes(year)) return;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    const emailHtml = (ev.email && ev.email !== '—' && ev.email !== 'not found')
+      ? `<a href="mailto:${ev.email}">${ev.email}</a>` : '—';
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="event">${ev.event}</div>
+        <div class="date">${ev.date}</div>
+      </div>
+      <div class="org">${ev.organizer}</div>
+      <div class="contact-row">
+        <span>${ev.contact !== '—' ? ev.contact : 'Contact not listed'}</span>
+        <span>${emailHtml}</span>
+        <span>${ev.phone !== '—' ? ev.phone : ''}</span>
+        <span class="${badgeClass(ev.type)}">${ev.type === 'direct' ? 'Direct' : ev.type === 'organization-general' ? 'Org' : 'Limited'}</span>
+        <span><a href="${ev.url}" target="_blank" rel="noopener">Source</a></span>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.getElementById('filterYear').addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
